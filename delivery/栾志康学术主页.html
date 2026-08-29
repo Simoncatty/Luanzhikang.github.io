@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>栾志康 | Zhikang Luan — 学术主页</title>
+<style>
+/* SECTION: base */
+:root{
+  --ink:#1c2333; --muted:#5b6472; --line:#e3e6ec; --accent:#1f4e8c; --accent-soft:#eaf1fa;
+  --serif:Georgia,"Times New Roman","Songti SC",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--ink);background:#fff;line-height:1.7;font-size:16px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:960px;margin:0 auto;padding:0 24px}
+
+/* SECTION: header */
+header.site{padding:56px 0 20px;text-align:center}
+header.site h1{font-family:var(--serif);font-size:44px;font-weight:700;letter-spacing:1px}
+header.site .sub{color:var(--muted);margin-top:10px;font-size:17px}
+header.site .sub .dot{margin:0 8px;color:#c3c9d4}
+
+/* SECTION: nav */
+nav.top{position:sticky;top:0;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);z-index:50}
+nav.top .inner{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;padding:10px 12px;position:relative}
+nav.top a.navlink{padding:6px 14px;border-radius:6px;color:var(--muted);font-size:15px;font-weight:500}
+nav.top a.navlink:hover{color:var(--accent);text-decoration:none;background:var(--accent-soft)}
+nav.top a.navlink.active{color:var(--accent);background:var(--accent-soft)}
+#langBtn{position:absolute;right:12px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:4px 14px;font-size:13px;color:var(--muted);cursor:pointer}
+#langBtn:hover{color:var(--accent);border-color:var(--accent)}
+@media (max-width:720px){#langBtn{position:static;margin-left:6px}}
+
+/* SECTION: about */
+section{padding:52px 0 8px}
+section h2{font-family:var(--serif);font-size:26px;border-bottom:2px solid var(--ink);padding-bottom:8px;margin-bottom:26px;letter-spacing:.5px}
+.about-grid{display:grid;grid-template-columns:220px 1fr;gap:36px;align-items:start}
+.avatar-box{position:relative}
+.avatar-box img{width:220px;height:220px;object-fit:cover;border-radius:10px;border:1px solid var(--line);display:block;box-shadow:0 4px 18px rgba(28,35,51,.10)}
+.avatar-fallback{width:220px;height:220px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#5b8ac9);color:#fff;display:none;align-items:center;justify-content:center;font-family:var(--serif);font-size:64px}
+.about-text p{margin-bottom:14px}
+.about-links{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px}
+.about-links a{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;padding:6px 16px;font-size:14px;color:var(--accent);background:#fff}
+.about-links a:hover{background:var(--accent-soft);text-decoration:none}
+@media (max-width:720px){.about-grid{grid-template-columns:1fr}.avatar-box{display:flex;justify-content:center}}
+
+/* SECTION: news */
+ul.news{list-style:none}
+ul.news li{display:grid;grid-template-columns:110px 1fr;gap:18px;padding:12px 0;border-bottom:1px dashed var(--line)}
+ul.news .date{font-family:var(--serif);color:var(--muted);font-size:15px;white-space:nowrap}
+ul.news .txt{font-size:15.5px}
+@media (max-width:720px){ul.news li{grid-template-columns:1fr;gap:2px}}
+
+/* SECTION: publications */
+.filter-bar{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}
+.filter-bar button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 18px;font-size:14px;color:var(--muted);cursor:pointer}
+.filter-bar button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+ol.pubs{list-style:none;counter-reset:pub}
+ol.pubs li.pub{display:grid;grid-template-columns:96px 1fr;gap:20px;padding:20px 0;border-bottom:1px solid var(--line)}
+.pub .badge{font-family:var(--serif);text-align:center}
+.pub .badge .yr{font-size:20px;font-weight:700;color:var(--ink)}
+.pub .badge .ven{font-size:12.5px;color:var(--muted);line-height:1.4;margin-top:2px}
+.pub .title{font-size:17px;font-weight:600}
+.pub .title a{color:var(--ink)}
+.pub .title a:hover{color:var(--accent)}
+.pub .authors{margin-top:6px;font-size:14.5px;color:var(--muted)}
+.pub .authors .me{color:var(--accent);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.pub .venue{margin-top:4px;font-size:14.5px;font-family:var(--serif)}
+.pub .venue em{font-family:var(--serif)}
+.pub .meta{margin-top:8px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;font-size:13.5px}
+.pub .meta .chip{background:var(--accent-soft);color:var(--accent);border-radius:4px;padding:2px 8px;font-weight:600}
+.pub .meta button.linklike{border:none;background:none;color:var(--accent);cursor:pointer;font-size:13.5px;padding:2px 0}
+.pub .meta button.linklike:hover{text-decoration:underline}
+.pub pre.bib{display:none;margin-top:10px;background:#f6f8fb;border:1px solid var(--line);border-radius:8px;padding:12px;font-size:12.5px;overflow:auto;line-height:1.5}
+.pub pre.bib.open{display:block}
+.empty{color:var(--muted);padding:24px 0;text-align:center;display:none}
+@media (max-width:720px){ol.pubs li.pub{grid-template-columns:1fr;gap:8px}.pub .badge{text-align:left;display:flex;gap:10px;align-items:baseline}}
+
+/* SECTION: research */
+.res-card{border:1px solid var(--line);border-radius:10px;padding:22px 24px;margin-bottom:18px;background:#fff}
+.res-card:hover{box-shadow:0 4px 16px rgba(28,35,51,.08)}
+.res-card .period{font-size:13px;color:var(--accent);font-weight:600;letter-spacing:.5px}
+.res-card h3{font-size:17.5px;margin:6px 0 10px}
+.res-card p{font-size:15px;color:#333c4d}
+
+/* SECTION: education */
+.edu-item{display:grid;grid-template-columns:200px 1fr;gap:18px;padding:12px 0}
+.edu-item .when{font-family:var(--serif);color:var(--muted);font-size:15px}
+.edu-item .what b{font-size:16px}
+.edu-item .what span{display:block;color:var(--muted);font-size:14.5px}
+@media (max-width:720px){.edu-item{grid-template-columns:1fr;gap:2px}}
+h3.sub-h{font-size:17px;margin:26px 0 10px;font-family:var(--serif)}
+.skills{display:flex;flex-wrap:wrap;gap:8px}
+.skills .grp{border:1px solid var(--line);border-radius:8px;padding:8px 14px;font-size:14px;background:#fbfcfe}
+.skills .grp b{color:var(--accent);margin-right:6px}
+ul.honors{list-style:none;margin-top:4px}
+ul.honors li{padding:6px 0 6px 22px;position:relative;font-size:15px}
+ul.honors li::before{content:"◆";position:absolute;left:2px;color:var(--accent);font-size:10px;top:11px}
+
+/* SECTION: contact & footer */
+.contact-grid{display:flex;flex-wrap:wrap;gap:14px}
+.contact-grid a,.contact-grid .citem{border:1px solid var(--line);border-radius:10px;padding:14px 20px;font-size:15px;color:var(--ink);display:inline-flex;align-items:center;gap:10px;background:#fbfcfe}
+.contact-grid .citem b,.contact-grid a b{color:var(--accent)}
+footer{margin-top:64px;border-top:1px solid var(--line);padding:26px 0 40px;color:var(--muted);font-size:13.5px;text-align:center}
+
+/* SECTION: toast */
+#toast{position:fixed;left:50%;bottom:32px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;border-radius:999px;padding:9px 22px;font-size:14px;opacity:0;pointer-events:none;transition:all .25s;z-index:99}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+
+<!-- SECTION: header -->
+<header class="site">
+  <div class="wrap">
+    <h1><span data-i18n="name">栾志康</span></h1>
+    <div class="sub">
+      <span data-i18n="tagline">地球科学博士 · 机器学习 × 地质科学交叉研究</span>
+    </div>
+  </div>
+</header>
+
+<!-- SECTION: nav -->
+<nav class="top">
+  <div class="wrap inner">
+    <a class="navlink active" href="#about" data-i18n="nav_about">关于</a>
+    <a class="navlink" href="#news" data-i18n="nav_news">动态</a>
+    <a class="navlink" href="#publications" data-i18n="nav_pubs">论文</a>
+    <a class="navlink" href="#research" data-i18n="nav_research">研究</a>
+    <a class="navlink" href="#education" data-i18n="nav_edu">教育经历</a>
+    <a class="navlink" href="#contact" data-i18n="nav_contact">联系</a>
+    <button id="langBtn" type="button">EN</button>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- SECTION: about -->
+<section id="about">
+  <h2 data-i18n="h_about">关于我</h2>
+  <div class="about-grid">
+    <div class="avatar-box">
+      <img id="avatarImg" alt="栾志康证件照" data-image="">
+      <div class="avatar-fallback" id="avatarFallback">栾</div>
+    </div>
+    <div class="about-text">
+      <p data-i18n="bio1">我是栾志康，浙江大学地球科学学院矿物学、岩石学、矿床学博士（2021.9 – 2026.12），本科毕业于中国地质大学（武汉）地质学国际班。我的研究专注于将机器学习与地球科学深度融合，用数据驱动的方法解决复杂地质问题。</p>
+      <p data-i18n="bio2">我以第一作者身份在《Chemical Geology》（中科院一区）发表论文，提出新的地球化学数据融合模型；作为核心贡献者参与发表《Nature Communications》《National Science Review》《Geology》等顶级期刊论文共 6 篇，主导多源异构数据的清洗、特征工程与机器学习模型构建。</p>
+      <p data-i18n="bio3">我致力于将 AI 赋能地质的前沿技术应用于油气精准勘探、盆地演化分析及三维地质建模等高价值场景，驱动传统地质行业向智能化、数字化转型。</p>
+      <div class="about-links">
+        <a href="mailto:zinkluan@zju.edu.cn">✉ zinkluan@zju.edu.cn</a>
+        <a href="https://scholar.google.com/citations?user=HuLDoXUAAAAJ&hl=en" target="_blank" rel="noopener">🎓 Google Scholar</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: news -->
+<section id="news">
+  <h2 data-i18n="h_news">学术动态</h2>
+  <ul class="news" id="newsList"></ul>
+</section>
+
+<!-- SECTION: publications -->
+<section id="publications">
+  <h2 data-i18n="h_pubs">代表性论文</h2>
+  <div class="filter-bar" id="filterBar">
+    <button class="on" data-filter="all" data-i18n="f_all">全部</button>
+    <button data-filter="first" data-i18n="f_first">第一作者</button>
+    <button data-filter="top" data-i18n="f_top">顶刊合作</button>
+  </div>
+  <ol class="pubs" id="pubList"></ol>
+  <div class="empty" id="pubEmpty" data-i18n="pub_empty">该分类下暂无论文</div>
+</section>
+
+<!-- SECTION: research -->
+<section id="research">
+  <h2 data-i18n="h_research">研究项目</h2>
+  <div id="resList"></div>
+</section>
+
+<!-- SECTION: education -->
+<section id="education">
+  <h2 data-i18n="h_edu">教育与荣誉</h2>
+  <div class="edu-item">
+    <div class="when">2021.9 – 2026.12</div>
+    <div class="what"><b data-i18n="edu1s">浙江大学 · 地球科学学院</b><span data-i18n="edu1d">矿物学、岩石学、矿床学 · 理学博士</span></div>
+  </div>
+  <div class="edu-item">
+    <div class="when">2017.9 – 2021.6</div>
+    <div class="what"><b data-i18n="edu2s">中国地质大学（武汉） · 地球科学学院</b><span data-i18n="edu2d">地质学（国际班） · 理学学士</span></div>
+  </div>
+
+  <h3 class="sub-h" data-i18n="h_skills">技能专长</h3>
+  <div class="skills" id="skillsBox"></div>
+
+  <h3 class="sub-h" data-i18n="h_honors">荣誉奖项</h3>
+  <ul class="honors" id="honorsList"></ul>
+</section>
+
+<!-- SECTION: contact -->
+<section id="contact">
+  <h2 data-i18n="h_contact">联系方式</h2>
+  <div class="contact-grid">
+    <a href="mailto:zinkluan@zju.edu.cn"><b>Email</b> zinkluan@zju.edu.cn</a>
+    <div class="citem"><b data-i18n="c_phone">电话</b> (+86) 138-5184-1986</div>
+    <a href="https://scholar.google.com/citations?user=HuLDoXUAAAAJ&hl=en" target="_blank" rel="noopener"><b>Google Scholar</b> <span data-i18n="c_profile">学术主页</span></a>
+  </div>
+</section>
+
+</main>
+
+<!-- SECTION: footer -->
+<footer>
+  <div class="wrap">
+    <span data-i18n="footer">© 2026 栾志康 · 本页更新于 2026 年 8 月</span>
+  </div>
+</footer>
+
+<div id="toast" role="status"></div>
+
+<script>
+/* SECTION: site-data */
+window.SITE = {
+  avatar: "https://workspace-cdn.uzone.com/7241fe09abda42d49fcb936afcbafda0%2Fo%2F1788010264792-c.png?auth_key=1790602265-0-0-812ad4460d61aa525c1889b81a5929ad",
+  scholar: "https://scholar.google.com/citations?user=HuLDoXUAAAAJ&hl=en",
+  email: "zinkluan@zju.edu.cn",
+  phone: "(+86) 138-5184-1986",
+  news: [
+    { date: "2025-09", zh: "第一作者论文发表于《Chemical Geology》（中科院一区，IF 4.8+），提出基于机器学习的冈底斯地体隆升研究新框架。", en: "First-author paper published in Chemical Geology (CAS Q1, IF 4.8+), proposing a machine-learning framework for the uplift history of the Gangdese terrane." },
+    { date: "2025-08", zh: "合作论文发表于《National Science Review》，揭示冥古宙地壳由汇聚板块构造作用形成。", en: "Co-authored paper published in National Science Review, revealing that Earth's Hadean crust formed via operation of convergent tectonics." },
+    { date: "2025-07", zh: "参加 Goldschmidt 2025 大会（布拉格）并作张贴报告。", en: "Poster presentation at Goldschmidt 2025 (Prague)." },
+    { date: "2025-06", zh: "荣获比亚迪奖学金（2025）。", en: "Awarded the BYD Scholarship (2025)." },
+    { date: "2025-01", zh: "合作论文发表于《Geochemistry, Geophysics, Geosystems》，建立评估 TTG 熔融压力条件的机器学习模型。", en: "Co-authored paper published in Geochemistry, Geophysics, Geosystems, building a machine-learning model for assessing melting pressure conditions of TTG genesis." },
+    { date: "2024-12", zh: "合作论文发表于《Geology》，实现洋中脊玄武岩 CO2 含量的机器学习预测。", en: "Co-authored paper published in Geology on machine-learning prediction of CO2 content in mid-ocean ridge basalts." },
+    { date: "2024-04", zh: "参加 EGU 2024 大会（维也纳）并作口头报告。", en: "Oral presentation at EGU 2024 (Vienna)." },
+    { date: "2024-11", zh: "参加中国地球科学联合学术年会（厦门）并作口头报告。", en: "Oral presentation at the Joint Annual Meeting of Earth Sciences of China (Xiamen)." },
+    { date: "2023-04", zh: "参加第 18 届中国矿物岩石地球化学学会学术年会（合肥）并作口头报告。", en: "Oral presentation at the 18th CSMPG Annual Meeting (Hefei)." },
+    { date: "2022-07", zh: "参加 Goldschmidt 2022 大会（夏威夷）并作口头报告。", en: "Oral presentation at Goldschmidt 2022 (Hawaii)." },
+    { date: "2022-12", zh: "合作论文发表于《Nature Communications》；同年于第二届全国地学研究生论坛作口头报告并获优秀报告奖。", en: "Co-authored paper published in Nature Communications; received the Outstanding Presentation Award at the 2nd National Geoscience Graduate Forum." },
+    { date: "2021-12", zh: "合作论文发表于《Nature Communications》，揭示太古宙大型水平板块运动。", en: "Co-authored paper published in Nature Communications, demonstrating large Archean horizontal plate motions." }
+  ],
+  pubs: [
+    {
+      year: 2025, tag: "Chemical Geology", first: true,
+      title: "The protracted role of India-Eurasia collision in the uplift of the Gangdese terrane revealed by machine learning",
+      authors: [["Z. Luan", true], ["J. Liu", false], ["Y. Hao", false], ["J. ZhangZhou", false], ["Q. Xia", false], ["C. Su", false], ["E. Hanski", false], ["J. Zhou", false], ["T. Lei", false]],
+      venue: "Chemical Geology, 123022",
+      noteZh: "第一作者 · 中科院一区", noteEn: "First author · CAS Q1",
+      link: "https://www.sciencedirect.com/science/article/abs/pii/S0009254125004127",
+      doi: "10.1016/j.chemgeo.2025.123022",
+      bib: "@article{luan2025protracted,\n  title={The protracted role of India-Eurasia collision in the uplift of the Gangdese terrane revealed by machine learning},\n  author={Luan, Zhikang and Liu, Jia and Hao, Yantao and ZhangZhou, J. and Xia, Qunke and Su, Chan and Hanski, Eero and Zhou, J. and Lei, T.},\n  journal={Chemical Geology},\n  pages={123022},\n  year={2025},\n  publisher={Elsevier}\n}"
+    },
+    {
+      year: 2025, tag: "Natl. Sci. Rev.", first: false,
+      title: "Earth's Hadean crust formed via operation of convergent tectonics",
+      authors: [["D. Lu", false], ["J. Liu", false], ["Q. Xia", false], ["Z. Luan", true], ["et al.", false]],
+      venue: "National Science Review, 12(8), nwaf230",
+      noteZh: "合作 · 顶级期刊", noteEn: "Co-authored · top journal",
+      link: "https://doi.org/10.1093/nsr/nwaf230",
+      doi: "10.1093/nsr/nwaf230",
+      bib: "@article{lu2025hadean,\n  title={Earth's Hadean crust formed via operation of convergent tectonics},\n  author={Lu, D. and Liu, J. and Xia, Q. and Luan, Zhikang and others},\n  journal={National Science Review},\n  volume={12},\n  number={8},\n  pages={nwaf230},\n  year={2025}\n}"
+    },
+    {
+      year: 2025, tag: "G3", first: false,
+      title: "Machine Learning Model for Assessing Melting Pressure Conditions of the TTG Genesis: Implications for the Timing of the Onset of Global Plate Tectonics",
+      authors: [["D. Lu", false], ["J. Liu", false], ["Q. Xia", false], ["Z. Luan", true], ["et al.", false]],
+      venue: "Geochemistry, Geophysics, Geosystems, 26(11), e2025GC012503",
+      noteZh: "合作", noteEn: "Co-authored",
+      link: "https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2025GC012503",
+      doi: "10.1029/2025GC012503",
+      bib: "@article{lu2025ttg,\n  title={Machine Learning Model for Assessing Melting Pressure Conditions of the TTG Genesis},\n  author={Lu, D. and Liu, J. and Xia, Q. and Luan, Zhikang and others},\n  journal={Geochemistry, Geophysics, Geosystems},\n  volume={26},\n  number={11},\n  pages={e2025GC012503},\n  year={2025}\n}"
+    },
+    {
+      year: 2024, tag: "Geology", first: false,
+      title: "Prediction of CO2 content in mid-ocean ridge basalts via a machine learning approach",
+      authors: [["T.-T. Lei", false], ["J. Liu", false], ["Q.-K. Xia", false], ["J.-J. Zhou", false], ["Z.-K. Luan", true]],
+      venue: "Geology, 52(12), 901-905",
+      noteZh: "合作", noteEn: "Co-authored",
+      link: "https://doi.org/10.1130/G52513.1",
+      doi: "10.1130/G52513.1",
+      bib: "@article{lei2024co2,\n  title={Prediction of CO2 content in mid-ocean ridge basalts via a machine learning approach},\n  author={Lei, Ting-Ting and Liu, Jia and Xia, Qun-Ke and Zhou, Jin-Jia and Luan, Zhi-Kang},\n  journal={Geology},\n  volume={52},\n  number={12},\n  pages={901--905},\n  year={2024}\n}"
+    },
+    {
+      year: 2022, tag: "Nat. Commun.", first: false,
+      title: "Emergence of passive margins in accreting archipelagos signals continental stability and creation of pre-GOE oxygen oases",
+      authors: [["Y. Peng", false], ["T. Kusky", false], ["L. Wang", false], ["Z. Luan", true], ["et al.", false]],
+      venue: "Nature Communications, 13, 7821",
+      noteZh: "合作 · 顶级期刊", noteEn: "Co-authored · top journal",
+      link: "https://www.nature.com/articles/s41467-022-34826-0",
+      doi: "10.1038/s41467-022-34826-0",
+      bib: "@article{peng2022passive,\n  title={Emergence of passive margins in accreting archipelagos signals continental stability and creation of pre-GOE oxygen oases},\n  author={Peng, Y. and Kusky, T. and Wang, L. and Luan, Zhikang and others},\n  journal={Nature Communications},\n  volume={13},\n  pages={7821},\n  year={2022}\n}"
+    },
+    {
+      year: 2021, tag: "Nat. Commun.", first: false,
+      title: "Alpine-style nappes thrust over ancient North China continental margin demonstrate large Archean horizontal plate motions",
+      authors: [["Y. Zhong", false], ["T. Kusky", false], ["L. Wang", false], ["A. Polat", false], ["X. Liu", false], ["Y. Peng", false], ["Z. Luan", true], ["et al.", false]],
+      venue: "Nature Communications, 12, 6172",
+      noteZh: "合作 · 顶级期刊", noteEn: "Co-authored · top journal",
+      link: "https://www.nature.com/articles/s41467-021-26395-5",
+      doi: "10.1038/s41467-021-26395-5",
+      bib: "@article{zhong2021alpine,\n  title={Alpine-style nappes thrust over ancient North China continental margin demonstrate large Archean horizontal plate motions},\n  author={Zhong, Y. and Kusky, T. and Wang, L. and Polat, A. and Liu, X. and Peng, Y. and Luan, Zhikang and others},\n  journal={Nature Communications},\n  volume={12},\n  pages={6172},\n  year={2021}\n}"
+    }
+  ],
+  research: [
+    {
+      periodZh: "2021 – 2025", periodEn: "2021 – 2025",
+      zhTitle: "全球造山带地壳厚度变化历史：基于机器学习的研究",
+      enTitle: "Crustal Thickness Evolution of Global Orogens: A Machine Learning Study",
+      zhDesc: "基于 XGBoost 构建多源地质数据融合预测模型，整合岩石地球化学、地震层析成像与热年代学数据，筛选 12 个关键指标并完成 5 折交叉验证，模型 R² 达 0.87，较传统方法提升 25%；重建环太平洋、特提斯等 6 个主要造山带 26 亿年地壳厚度演化序列。成果发表于《Chemical Geology》。",
+      enDesc: "Built an XGBoost-based multi-source fusion model integrating geochemical, seismic tomographic and thermochronological data; screened 12 key features with 5-fold cross-validation, reaching R² = 0.87 (25% over traditional methods). Reconstructed 2.6 Gyr crustal thickness histories of six major orogens. Published in Chemical Geology."
+    },
+    {
+      periodZh: "2023 – 至今", periodEn: "2023 – present",
+      zhTitle: "基于机器学习定量恢复古俯冲带参数",
+      enTitle: "Quantitative Restoration of Paleo-Subduction Parameters via Machine Learning",
+      zhDesc: "设计并实现基于 CNN 与 CatBoost 的俯冲板片参数恢复模型，处理俯冲角度、板片深度、汇聚速率等高维结构化变量，参数恢复准确率达 89%；成功恢复西太平洋、安第斯等 4 个典型俯冲带自中生代以来的构造参数演化序列。",
+      enDesc: "Designed CNN + CatBoost models to restore subduction angle, slab depth and convergence rate from high-dimensional structured variables, achieving 89% accuracy; recovered Mesozoic-to-present parameter evolution for four typical subduction zones (West Pacific, Andes, etc.)."
+    },
+    {
+      periodZh: "2019 – 2021", periodEn: "2019 – 2021",
+      zhTitle: "华北克拉通中部造山带 25 亿年被动陆源碎屑锆石研究",
+      enTitle: "Detrital Zircon Study of the 2.5 Ga Passive Margin, Central North China Craton",
+      zhDesc: "系统采集并分析 800 余颗碎屑锆石 U-Pb 年龄与 Hf 同位素组成（LA-ICP-MS），识别太古宙与古元古代两组年龄峰值，构建古元古代被动陆缘沉积-构造演化模型。成果合作发表于《Nature Communications》。",
+      enDesc: "Analyzed U-Pb ages and Hf isotopes of 800+ detrital zircons (LA-ICP-MS), identifying Archean and Paleoproterozoic age peaks and building a depositional-tectonic evolution model for the Paleoproterozoic passive margin. Co-published in Nature Communications."
+    }
+  ]
+};
+
+</script>
+<script>
+/* SECTION: i18n */
+var LANG = "zh";
+var I18N = {
+  zh: {
+    name:"栾志康", tagline:"地球科学博士 · 机器学习 × 地质科学交叉研究",
+    nav_about:"关于", nav_news:"动态", nav_pubs:"论文", nav_research:"研究", nav_edu:"教育经历", nav_contact:"联系",
+    h_about:"关于我", h_news:"学术动态", h_pubs:"代表性论文", h_research:"研究项目", h_edu:"教育与荣誉", h_skills:"技能专长", h_honors:"荣誉奖项", h_contact:"联系方式",
+    bio1:"我是栾志康，浙江大学地球科学学院矿物学、岩石学、矿床学博士（2021.9 – 2026.12），本科毕业于中国地质大学（武汉）地质学国际班。我的研究专注于将机器学习与地球科学深度融合，用数据驱动的方法解决复杂地质问题。",
+    bio2:"我以第一作者身份在《Chemical Geology》（中科院一区）发表论文，提出新的地球化学数据融合模型；作为核心贡献者参与发表《Nature Communications》《National Science Review》《Geology》等顶级期刊论文共 6 篇，主导多源异构数据的清洗、特征工程与机器学习模型构建。",
+    bio3:"我致力于将 AI 赋能地质的前沿技术应用于油气精准勘探、盆地演化分析及三维地质建模等高价值场景，驱动传统地质行业向智能化、数字化转型。",
+    f_all:"全部", f_first:"第一作者", f_top:"顶刊合作", pub_empty:"该分类下暂无论文",
+    c_phone:"电话", c_profile:"学术主页",
+    footer:"© 2026 栾志康 · 本页更新于 2026 年 8 月",
+    l_bib:"BibTeX", l_copy:"复制", l_paper:"论文链接", l_copied:"BibTeX 已复制到剪贴板",
+    skills:[["编程开发","Python · C++ · Git · Linux"],["机器学习","Scikit-learn · XGBoost · CatBoost · PyTorch · 特征工程 · 模型部署"],["大模型应用","Prompt Engineering · RAG 构建 · Agent 开发 · API 集成"],["数据与可视化","Pandas · NumPy · Matplotlib · ENVI · ArcGIS · 遥感图像处理"],["其他","Adobe Illustrator · LaTeX · 学术英语写作"]],
+    honors:["优秀研究生（2021-2022；2023-2024；2024-2025）","国家奖学金（2017-2018）","比亚迪奖学金（2025）","第二届全国地学研究生论坛 · 优秀报告奖（2022）"]
+  },
+  en: {
+    name:"Zhikang Luan", tagline:"Ph.D. in Earth Sciences · Machine Learning × Geoscience",
+    nav_about:"About", nav_news:"News", nav_pubs:"Publications", nav_research:"Research", nav_edu:"Education", nav_contact:"Contact",
+    h_about:"About Me", h_news:"News", h_pubs:"Selected Publications", h_research:"Research Projects", h_edu:"Education & Honors", h_skills:"Skills", h_honors:"Honors & Awards", h_contact:"Contact",
+    bio1:"I am Zhikang Luan, a Ph.D. candidate in Mineralogy, Petrology and Economic Geology at the School of Earth Sciences, Zhejiang University (2021.9 – 2026.12). I received my B.Sc. from the International Class of Geology at China University of Geosciences (Wuhan). My research focuses on the deep fusion of machine learning and earth sciences, solving complex geological problems with data-driven methods.",
+    bio2:"I have published a first-author paper in Chemical Geology (CAS Q1), proposing a new geochemical data fusion model, and co-authored a total of 6 papers in top journals including Nature Communications, National Science Review and Geology, leading the cleaning, feature engineering and machine-learning modelling of multi-source heterogeneous data.",
+    bio3:"I am committed to applying AI-empowered geoscience to high-value scenarios such as precise hydrocarbon exploration, basin evolution analysis and 3D geological modelling, driving the intelligent and digital transformation of the traditional geoscience industry.",
+    f_all:"All", f_first:"First Author", f_top:"Top Journals", pub_empty:"No publications in this category.",
+    c_phone:"Phone", c_profile:"Profile",
+    footer:"© 2026 Zhikang Luan · Last updated Aug 2026",
+    l_bib:"BibTeX", l_copy:"Copy", l_paper:"Paper", l_copied:"BibTeX copied to clipboard",
+    skills:[["Programming","Python · C++ · Git · Linux"],["Machine Learning","Scikit-learn · XGBoost · CatBoost · PyTorch · Feature Engineering · Model Deployment"],["LLM Applications","Prompt Engineering · RAG · Agent Development · API Integration"],["Data & Visualization","Pandas · NumPy · Matplotlib · ENVI · ArcGIS · Remote Sensing"],["Others","Adobe Illustrator · LaTeX · Academic English Writing"]],
+    honors:["Outstanding Graduate Student (2021-2022; 2023-2024; 2024-2025)","National Scholarship (2017-2018)","BYD Scholarship (2025)","Outstanding Presentation Award, 2nd National Geoscience Graduate Forum (2022)"]
+  }
+};
+
+/* SECTION: helpers */
+function $(s){return document.querySelector(s)}
+function t(k){return I18N[LANG][k]}
+function esc(s){var d=document.createElement("div");d.textContent=s;return d.innerHTML}
+var toastTimer=null;
+function toast(msg){var el=$("#toast");el.textContent=msg;el.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(function(){el.classList.remove("show")},1800)}
+
+/* SECTION: render-news */
+function renderNews(){
+  var html = SITE.news.map(function(n){
+    return '<li><div class="date">'+esc(n.date)+'</div><div class="txt">'+esc(LANG==="zh"?n.zh:n.en)+'</div></li>';
+  }).join("");
+  $("#newsList").innerHTML = html;
+}
+
+/* SECTION: render-pubs */
+var curFilter = "all";
+function pubMatch(p){
+  if(curFilter==="all") return true;
+  if(curFilter==="first") return p.first;
+  if(curFilter==="top") return !p.first;
+  return true;
+}
+function renderPubs(){
+  var items = SITE.pubs.filter(pubMatch);
+  $("#pubEmpty").style.display = items.length ? "none" : "block";
+  var html = items.map(function(p,i){
+    var authors = p.authors.map(function(a){
+      return a[1] ? '<span class="me">'+esc(a[0])+'</span>' : esc(a[0]);
+    }).join(", ");
+    var note = LANG==="zh" ? p.noteZh : p.noteEn;
+    return '<li class="pub">'
+      +'<div class="badge"><div class="yr">'+p.year+'</div><div class="ven">'+esc(p.tag)+'</div></div>'
+      +'<div>'
+      +'<div class="title"><a href="'+p.link+'" target="_blank" rel="noopener">'+esc(p.title)+'</a></div>'
+      +'<div class="authors">'+authors+'</div>'
+      +'<div class="venue"><em>'+esc(p.venue)+'</em></div>'
+      +'<div class="meta"><span class="chip">'+esc(note)+'</span>'
+      +'<button class="linklike bib-toggle" data-i="'+i+'">'+t("l_bib")+'</button>'
+      +'<button class="linklike bib-copy" data-i="'+i+'" data-primary-action="copy-bibtex">'+t("l_copy")+'</button>'
+      +'</div>'
+      +'<pre class="bib" id="bib-'+i+'">'+esc(p.bib)+'</pre>'
+      +'</div></li>';
+  }).join("");
+  $("#pubList").innerHTML = html;
+}
+
+/* SECTION: render-research */
+function renderResearch(){
+  var html = SITE.research.map(function(r){
+    return '<div class="res-card"><div class="period">'+esc(LANG==="zh"?r.periodZh:r.periodEn)+'</div>'
+      +'<h3>'+esc(LANG==="zh"?r.zhTitle:r.enTitle)+'</h3>'
+      +'<p>'+esc(LANG==="zh"?r.zhDesc:r.enDesc)+'</p></div>';
+  }).join("");
+  $("#resList").innerHTML = html;
+}
+
+/* SECTION: render-skills-honors */
+function renderSkillsHonors(){
+  $("#skillsBox").innerHTML = t("skills").map(function(s){
+    return '<div class="grp"><b>'+esc(s[0])+'</b>'+esc(s[1])+'</div>';
+  }).join("");
+  $("#honorsList").innerHTML = t("honors").map(function(h){
+    return '<li>'+esc(h)+'</li>';
+  }).join("");
+}
+
+/* SECTION: i18n-apply */
+function applyStatic(){
+  document.querySelectorAll("[data-i18n]").forEach(function(el){
+    var k = el.getAttribute("data-i18n");
+    if(I18N[LANG][k] && typeof I18N[LANG][k] === "string") el.textContent = I18N[LANG][k];
+  });
+  document.documentElement.lang = LANG==="zh" ? "zh-CN" : "en";
+  document.title = LANG==="zh" ? "栾志康 | Zhikang Luan — 学术主页" : "Zhikang Luan | 栾志康 — Academic Homepage";
+  $("#langBtn").textContent = LANG==="zh" ? "EN" : "中文";
+}
+function renderAll(){ applyStatic(); renderNews(); renderPubs(); renderResearch(); renderSkillsHonors(); }
+
+/* SECTION: events */
+$("#langBtn").addEventListener("click", function(){
+  LANG = LANG==="zh" ? "en" : "zh";
+  renderAll();
+});
+$("#filterBar").addEventListener("click", function(e){
+  var btn = e.target.closest("button[data-filter]");
+  if(!btn) return;
+  curFilter = btn.getAttribute("data-filter");
+  document.querySelectorAll("#filterBar button").forEach(function(b){b.classList.toggle("on", b===btn)});
+  renderPubs();
+});
+$("#pubList").addEventListener("click", function(e){
+  var tg = e.target.closest(".bib-toggle");
+  if(tg){
+    var pre = document.getElementById("bib-"+tg.getAttribute("data-i"));
+    if(pre) pre.classList.toggle("open");
+    return;
+  }
+  var cp = e.target.closest(".bib-copy");
+  if(cp){
+    var idx = +cp.getAttribute("data-i");
+    var items = SITE.pubs.filter(pubMatch);
+    var bib = items[idx] ? items[idx].bib : "";
+    copyText(bib);
+  }
+});
+function copyText(text){
+  function done(){ toast(t("l_copied")); }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done, function(){ fallbackCopy(text); done(); });
+  } else { fallbackCopy(text); done(); }
+}
+function fallbackCopy(text){
+  var ta = document.createElement("textarea");
+  ta.value = text; ta.style.position="fixed"; ta.style.opacity="0";
+  document.body.appendChild(ta); ta.select();
+  try{ document.execCommand("copy"); }catch(e){}
+  document.body.removeChild(ta);
+}
+
+/* SECTION: avatar */
+(function(){
+  var img = $("#avatarImg");
+  img.setAttribute("data-image", SITE.avatar);
+  img.onerror = function(){ img.style.display="none"; var f=$("#avatarFallback"); f.style.display="flex"; };
+  img.src = img.getAttribute("data-image");
+})();
+
+/* SECTION: scrollspy */
+(function(){
+  var links = document.querySelectorAll("nav.top a.navlink");
+  var secs = [];
+  links.forEach(function(l){ var s=document.querySelector(l.getAttribute("href")); if(s) secs.push([s,l]); });
+  function onScroll(){
+    var y = window.scrollY + 120;
+    var cur = secs[0];
+    secs.forEach(function(p){ if(p[0].offsetTop <= y) cur = p; });
+    links.forEach(function(l){ l.classList.toggle("active", l===cur[1]); });
+  }
+  window.addEventListener("scroll", onScroll, {passive:true});
+  onScroll();
+})();
+
+renderAll();
+</script>
+</body>
+</html>
